@@ -5,10 +5,10 @@
 #
 
 # Pull base image
-# FROM openjdk:11.0.2
+ FROM openjdk:11.0.2
 
-FROM arm64v8/openjdk:11.0.2
-
+#FROM arm64v8/openjdk:11.0.2
+FROM arm64v8/openjdk:8-jdk-alpine
 
 # Env variables
 ENV SCALA_VERSION 2.12.8
