@@ -1,11 +1,11 @@
 #
-# Scala and sbt Dockerfile
+# Scala and sbt in Dockerfile for arm64v8 architecture
 #
-# https://github.com/hseeberger/scala-sbt
+# https://github.com/michee/sbtInDocker
 #
 
 # Pull base image
- FROM openjdk:11.0.2
+# FROM openjdk:11.0.2
 
 #FROM arm64v8/openjdk:11.0.2
 FROM arm64v8/openjdk:8-jdk-alpine
