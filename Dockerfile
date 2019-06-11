@@ -29,12 +29,8 @@ RUN \
   apt-get update && \
   apt-get install sbt && \
   sbt sbtVersion && \
-  mkdir project && \
-  echo "scalaVersion := \"${SCALA_VERSION}\"" > build.sbt && \
-  echo "sbt.version=${SBT_VERSION}" > project/build.properties && \
-  echo "case object Temp" > Temp.scala && \
-  sbt compile && \
-  rm -r project && rm build.sbt && rm Temp.scala && rm -r target
-
+  mkdir project
+  
+  # rm -r project && rm build.sbt && rm Temp.scala && rm -r target
 # Define working directory
-WORKDIR /root
+WORKDIR /project
