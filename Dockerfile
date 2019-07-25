@@ -6,9 +6,6 @@
 
 # Pull base image
 FROM arm64v8/openjdk:11.0.2
-#FROM arm64v8/openjdk:8-jdk-alpine
-
-#FROM openjdk:11.0.2
 
 # Env variables
 ENV SCALA_VERSION 2.12.8
@@ -29,8 +26,6 @@ RUN \
   apt-get update && \
   apt-get install sbt && \
   sbt sbtVersion
-
-  # rm -r project && rm build.sbt && rm Temp.scala && rm -r target
 
 # Define working directory
 # -v $(pwd)/echoService:/project
