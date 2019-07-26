@@ -3,6 +3,10 @@
 #
 # https://github.com/michee/sbtInDocker
 #
+# example run: 
+#
+# docker run --rm -it -v $(pwd)/testproject:/project -v $(pwd)/ivy2:/ivy2 michee/sbt:1.2.8
+#
 
 # Pull base image
 FROM arm64v8/openjdk:11.0.2
@@ -10,6 +14,9 @@ FROM arm64v8/openjdk:11.0.2
 # Env variables
 ENV SCALA_VERSION 2.12.8
 ENV SBT_VERSION 1.2.8
+
+# easy access to ivy2 dir, origin in /root/.ivy2
+RUN mkdir /ivy2 && ln -s /ivy2 /root/.ivy2 
 
 # Install Scala
 ## Piping curl directly in tar
@@ -24,8 +31,10 @@ RUN \
   dpkg -i sbt-$SBT_VERSION.deb && \
   rm sbt-$SBT_VERSION.deb && \
   apt-get update && \
-  apt-get install sbt && \
-  sbt version
+  apt-get install sbt
+  
+  # sbt version
+  #mkdir /ivy2 && \ #sbt -Dsbt.ivy.home=/ivy2 && \ #sbt version
 
 # Define working directory
 # -v $(pwd)/echoService:/project
