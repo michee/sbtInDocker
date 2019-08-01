@@ -17,7 +17,7 @@ pipeline {
       }
       steps {
         echo 'deploy'
-        echo '$DOCKERHUB_USR'
+        echo $DOCKERHUB_USR
       }
     }
   }
