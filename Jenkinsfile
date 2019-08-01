@@ -7,7 +7,7 @@ pipeline {
       steps {
         echo 'build'
         sh 'ls -la'
-        sh   'build.sh'
+        sh   './build.sh'
       }
     }
     stage('deploy') {
