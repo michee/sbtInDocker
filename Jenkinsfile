@@ -12,8 +12,7 @@ pipeline {
     }
     stage('deploy') {
       environment {
-        DOCKERHUB_USR = credentials('dockerhub-usr')
-        DOCKERHUB_PSW = credentials('dockerhub-psw')
+        DOCKERHUB = credentials('dockerhub')
       }
       steps {
         echo 'deploy'
