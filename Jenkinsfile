@@ -24,7 +24,7 @@ pipeline {
     stage('clean') {
       steps {
         echo 'cleanup hosts docker from lefover containers'
-        sh   'docker system prune --all -y'
+        sh   'docker system prune --all -f'
       }
     }
   }
