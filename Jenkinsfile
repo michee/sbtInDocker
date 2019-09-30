@@ -11,7 +11,7 @@ pipeline {
         sh   'docker build --rm -t $CONTAINER .'
       }
     }
-  stage('deploy') {
+    stage('deploy') {
       environment {
         DOCKERHUB = credentials('dockerhub')
       }
@@ -21,11 +21,10 @@ pipeline {
         sh   'docker push $CONTAINER'
       }
     }
-  }
-  stage('clean') {
-    steps {
-      echo 'cleanup hosts docker from lefover containers'
-      sh   'docker system prune --all -y'
+    stage('clean') {
+      steps {
+        echo 'cleanup hosts docker from lefover containers'
+        sh   'docker system prune --all -y'
     }
   }
 }
