@@ -16,7 +16,8 @@ pipeline {
       }
       steps {
         echo 'deploy'
-        echo $DOCKERHUB_USR
+        //sh "docker login --username $dockerhub_USR --password $dockerhub_PSW" 
+        sh 'echo $DOCKERHUB_USR'
       }
     }
   }
