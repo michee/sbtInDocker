@@ -8,7 +8,7 @@ pipeline {
     stage('build') {
       steps {
         echo 'build'
-        sh 'docker build --rm -t $CONTAINER .'
+        sh   'docker build --rm -t $CONTAINER .'
       }
     }
   stage('deploy') {
@@ -17,15 +17,15 @@ pipeline {
       }
       steps {
         echo 'deploy'
-        sh "docker login --username $dockerhub_USR --password $dockerhub_PSW" 
-        sh 'docker push $CONTAINER'
+        sh   "docker login --username $dockerhub_USR --password $dockerhub_PSW" 
+        sh   'docker push $CONTAINER'
       }
     }
   }
   stage('clean') {
     steps {
-      echo 'cleanup hosts docker from lefover containers
-      sh 'docker system prune --all -y'
+      echo 'cleanup hosts docker from lefover containers'
+      sh   'docker system prune --all -y'
     }
   }
 }
