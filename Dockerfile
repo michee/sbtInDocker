@@ -48,6 +48,7 @@ RUN groupadd --gid ${gid} ${group} && useradd --gid ${gid} --uid ${uid} ${user} 
 RUN chown -R ${user}:${group} /opt
 RUN mkdir /home/sbtuser && chown -R ${user}:${group} /home/sbtuser
 RUN mkdir /logs && chown -R ${user}:${group} /logs
+RUN usermod -a -G sudo ${user}
 
 
 # install docker
