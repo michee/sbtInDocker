@@ -38,4 +38,14 @@ RUN \
 
 # Define working directory
 # -v $(pwd)/echoService:/project
+
+# install docker
+#ARG DOCKER_V=17.12.1~ce-0~debian
+ARG DOCKER_V=18.06.1~ce~3-0~debian
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
+    && add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/debian stretch stable" \
+    && apt-get update \
+    && apt-get install -y docker-ce=$DOCKER_V containerd.io \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR project 
