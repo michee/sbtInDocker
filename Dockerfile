@@ -41,6 +41,7 @@ RUN \
 
 # install docker
 ARG DOCKER_V=18.06.1~ce~3-0~debian
+RUN apt-cache madison docker-ce
 RUN apt-get install -y --allow-downgrades docker-ce=$DOCKER_V
 
 
