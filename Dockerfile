@@ -63,7 +63,9 @@ RUN id
 RUN wget https://download.docker.com/linux/static/stable/aarch64/docker-18.06.1-ce.tgz && \
     tar zxvf docker-18.06.1-ce.tgz && \
     cp docker/* /usr/bin/ &&\  
-    groupadd --gid 999 docker && \ 
-    usermod -a -G docker ${user}
+    groupadd docker && \ 
+    usermod -a -G docker ${user} && \
+    newgrp docker
+    
 
 WORKDIR project 
