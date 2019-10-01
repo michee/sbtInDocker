@@ -19,6 +19,8 @@ ENV SBT_VERSION 1.2.8
 RUN mkdir /ivy2 && ln -s /ivy2 /root/.ivy2
 RUN mkdir /sbt  && ln -s /sbt /root/.sbt && chmod 777 /sbt
 
+RUN groupadd -g 999 docker
+
 # Add and use user sbtuser
 ARG user=sbtuser
 ARG group=sbtuser
@@ -29,23 +31,18 @@ RUN chown -R ${user}:${group} /opt
 RUN mkdir /home/sbtuser && chown -R ${user}:${group} /home/sbtuser
 RUN mkdir /logs && chown -R ${user}:${group} /logs
 RUN usermod -a -G sudo ${user}
+RUN usermod -a -G docker ${user}
 
 # install docker
 ARG DOCKER_V=18.06.1~ce~3-0~debian
 # RUN apt-cache madison docker-ce
 # RUN apt-get install -y --allow-downgrades docker-ce=$DOCKER_V
 
-# testing
-RUN id
-
 # TODO: docker group id must be same as hosts docker group id. FIXME
 RUN wget https://download.docker.com/linux/static/stable/aarch64/docker-18.06.1-ce.tgz && \
     tar zxvf docker-18.06.1-ce.tgz && \
-    cp docker/* /usr/bin/ &&\  
-    groupadd -g 999 docker && \ 
-    usermod -a -G docker ${user} && \
-    newgrp docker
-
+    cp docker/* /usr/bin/
+   
 # Install Scala
 RUN \
   curl -fsL https://downloads.typesafe.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz | tar xfz - -C /root/ && \
@@ -65,8 +62,5 @@ RUN \
 
 # Define working directory
 # -v $(pwd)/echoService:/project
-
-
-    
 
 WORKDIR project 
