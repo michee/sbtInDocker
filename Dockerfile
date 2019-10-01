@@ -57,7 +57,7 @@ ARG DOCKER_V=18.06.1~ce~3-0~debian
 # RUN apt-get install -y --allow-downgrades docker-ce=$DOCKER_V
 
 # testing
-RUN echo id
+RUN id
 
 # TODO: docker group id must be same as hosts docker group id. FIXME
 RUN wget https://download.docker.com/linux/static/stable/aarch64/docker-18.06.1-ce.tgz && \
