@@ -58,8 +58,8 @@ ARG DOCKER_V=18.06.1~ce~3-0~debian
 
 RUN wget https://download.docker.com/linux/static/stable/aarch64/docker-18.06.1-ce.tgz && \
     tar zxvf docker-18.06.1-ce.tgz && \
-    cp docker/* /usr/bin/ && \
-    groupadd docker && \
-    usermod -a -G docker ${user}
+    cp docker/* /usr/bin/  
+   # groupadd docker && \
+  #  usermod -a -G docker ${user}
 
 WORKDIR project 
