@@ -16,7 +16,8 @@ ENV SCALA_VERSION 2.12.8
 ENV SBT_VERSION 1.2.8
 
 # easy access to ivy2 dir, origin in /root/.ivy2
-RUN mkdir /ivy2 && ln -s /ivy2 /root/.ivy2 
+RUN mkdir /ivy2 && ln -s /ivy2 /root/.ivy2
+RUN mkdir /sbt  && ln -s /sbt /root/.sbt
 
 # Install Scala
 RUN \
