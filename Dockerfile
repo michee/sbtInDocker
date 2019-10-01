@@ -19,7 +19,6 @@ ENV SBT_VERSION 1.2.8
 RUN mkdir /ivy2 && ln -s /ivy2 /root/.ivy2 
 
 # Install Scala
-## Piping curl directly in tar
 RUN \
   curl -fsL https://downloads.typesafe.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz | tar xfz - -C /root/ && \
   echo >> /root/.bashrc && \
