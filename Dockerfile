@@ -41,8 +41,17 @@ RUN \
 
 # install docker
 ARG DOCKER_V=18.06.1~ce~3-0~debian
-RUN apt-cache madison docker-ce
-RUN apt-get install -y --allow-downgrades docker-ce=$DOCKER_V
-
+# RUN apt-cache madison docker-ce
+# RUN apt-get install -y --allow-downgrades docker-ce=$DOCKER_V
+#RUN apt-get update \
+#    && apt-get upgrade -y \
+#    && apt-get install -y git curl software-properties-common apt-transport-https ca-certificates \
+#    && rm -rf /var/lib/apt/lists/*
+    
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - \
+    && add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/debian stretch stable" \
+    && apt-get update \
+    && apt-get install -y docker-ce=$DOCKER_V containerd.io \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR project 
