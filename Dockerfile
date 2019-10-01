@@ -63,4 +63,6 @@ RUN \
 # Define working directory
 # -v $(pwd)/echoService:/project
 
+USER ${user}:docker
+
 WORKDIR project 
