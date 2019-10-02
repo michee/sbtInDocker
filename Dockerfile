@@ -19,8 +19,6 @@ ENV SBT_VERSION 1.2.8
 RUN mkdir /ivy2 && ln -s /ivy2 /root/.ivy2
 RUN mkdir /sbt  && ln -s /sbt /root/.sbt && chmod 777 /sbt
 
-RUN groupadd -g 999 docker
-
 # Add and use user sbtuser
 ARG user=sbtuser
 ARG group=sbtuser
@@ -30,13 +28,6 @@ RUN groupadd --gid ${gid} ${group} && useradd --gid ${gid} --uid ${uid} ${user} 
 RUN chown -R ${user}:${group} /opt
 RUN mkdir /home/sbtuser && chown -R ${user}:${group} /home/sbtuser
 RUN mkdir /logs && chown -R ${user}:${group} /logs
-RUN usermod -a -G sudo ${user}
-RUN usermod -a -G docker ${user}
-
-# desperate measure to fix /var/run/docker.sock: connect: permission denied
-#RUN apt-get install acl
-#RUN setfacl -m user:${user}:rw /var/run/docker.sock
-RUN chmod 777 /var/run/docker.sock
 
 # install docker
 ARG DOCKER_V=18.06.1~ce~3-0~debian
@@ -49,7 +40,6 @@ RUN wget https://download.docker.com/linux/static/stable/aarch64/docker-18.06.1-
     cp docker/* /usr/bin/
 
 
-   
 # Install Scala
 RUN \
   curl -fsL https://downloads.typesafe.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz | tar xfz - -C /root/ && \
