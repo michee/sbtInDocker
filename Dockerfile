@@ -45,6 +45,9 @@ ARG DOCKER_V=18.06.1~ce~3-0~debian
 RUN wget https://download.docker.com/linux/static/stable/aarch64/docker-18.06.1-ce.tgz && \
     tar zxvf docker-18.06.1-ce.tgz && \
     cp docker/* /usr/bin/
+
+# desperate measure to fix /var/run/docker.sock: connect: permission denied
+RUN chmod 777 /var/run/docker.sock
    
 # Install Scala
 RUN \
@@ -66,6 +69,6 @@ RUN \
 # Define working directory
 # -v $(pwd)/echoService:/project
 
-USER ${user}:docker
+USER ${user}
 
 WORKDIR project 
