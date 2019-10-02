@@ -33,7 +33,7 @@ RUN mkdir /logs && chown -R ${user}:${group} /logs
 RUN usermod -a -G sudo ${user}
 RUN usermod -a -G docker ${user}
 
-RUN apt-get install setfacl
+RUN apt-get install acl
 RUN setfacl -m user:${user}:rw /var/run/docker.sock
 
 # install docker
