@@ -33,8 +33,10 @@ RUN mkdir /logs && chown -R ${user}:${group} /logs
 RUN usermod -a -G sudo ${user}
 RUN usermod -a -G docker ${user}
 
-RUN apt-get install acl
-RUN setfacl -m user:${user}:rw /var/run/docker.sock
+# desperate measure to fix /var/run/docker.sock: connect: permission denied
+#RUN apt-get install acl
+#RUN setfacl -m user:${user}:rw /var/run/docker.sock
+RUN chmod 777 /var/run/docker.sock
 
 # install docker
 ARG DOCKER_V=18.06.1~ce~3-0~debian
@@ -46,8 +48,7 @@ RUN wget https://download.docker.com/linux/static/stable/aarch64/docker-18.06.1-
     tar zxvf docker-18.06.1-ce.tgz && \
     cp docker/* /usr/bin/
 
-# desperate measure to fix /var/run/docker.sock: connect: permission denied
-RUN chmod 777 /var/run/docker.sock
+
    
 # Install Scala
 RUN \
